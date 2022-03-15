@@ -1,0 +1,11 @@
+package model;
+
+public class Jeu {
+	
+	private Couleur couleur;
+
+	public Jeu(Couleur couleur) {
+		this.couleur = couleur;
+	}
+
+}

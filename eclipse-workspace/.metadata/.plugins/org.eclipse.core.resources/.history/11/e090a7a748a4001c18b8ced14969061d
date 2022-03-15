@@ -1,0 +1,11 @@
+package model;
+
+public abstract class AbstractPiece {
+	
+	public AbstractPiece(Couleur couleur, Coord coord) {
+		this.name = "";
+		this.couleur = couleur;
+		this.coord = coord;
+	}
+
+}

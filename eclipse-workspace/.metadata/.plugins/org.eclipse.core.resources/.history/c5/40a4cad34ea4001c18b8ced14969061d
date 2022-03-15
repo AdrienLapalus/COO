@@ -1,0 +1,23 @@
+package model;
+
+public class Jeu {
+	
+	private Couleur couleur;
+
+	public Jeu(Couleur couleur) {
+		this.couleur = couleur;
+	}
+	
+	public boolean capture(int xCatch, int yCatch) {
+		return false;
+	}
+	
+	public Couleur getCouleur() {
+		return couleur;
+	}
+	
+	public Coord getKingCoord() {
+		return coord;
+	}
+
+}

@@ -1,0 +1,11 @@
+package model;
+
+public class Fou extends AbstractPiece {
+
+	public Fou(Couleur couleur, Coord coord) {
+		super(couleur, coord);
+		this.name ="";
+		// TODO Auto-generated constructor stub
+	}
+
+}
