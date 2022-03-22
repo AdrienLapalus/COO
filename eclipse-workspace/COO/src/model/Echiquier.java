@@ -1,6 +1,6 @@
 package model;
 
-import java.awt.List;
+import java.util.List;
 
 public class Echiquier implements BoardGames {
 
@@ -12,7 +12,8 @@ public class Echiquier implements BoardGames {
 		
 	}
 	
-	public List<PieceIHM> getPieceIHM(){
+	public List<PieceIHM> getPiecesIHM(){
+		return null;
 		
 	}
 	
@@ -48,6 +49,10 @@ public class Echiquier implements BoardGames {
 	public Couleur getPieceColor(int x, int y) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public boolean isMoveOk(int xInit, int yInit, int xFinal, int yFinal) {
+		return false;
 	}
 
 }

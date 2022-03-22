@@ -1,6 +1,6 @@
 package model;
 
-import java.awt.List;
+import java.util.List;
 
 public class Jeu {
 	
@@ -35,6 +35,7 @@ public class Jeu {
 	}
 	
 	public boolean isMoveOk(int xInit, int yInit, int xFinal, int yFinal){
+		return false;
 	}
 	
 	public boolean isPawnPromotion(int xFinal, int yFinal) {
@@ -42,4 +43,4 @@ public class Jeu {
 	}
 }
 	
-}
+
