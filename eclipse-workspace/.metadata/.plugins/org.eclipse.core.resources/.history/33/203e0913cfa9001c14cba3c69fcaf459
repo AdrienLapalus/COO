@@ -1,0 +1,41 @@
+package model;
+
+public class Cavalier extends AbstractPiece{
+
+
+	public Cavalier(Couleur couleur_de_piece,Coord coord) {
+		super(couleur_de_piece,coord);
+	}
+	
+	@Override
+	public boolean isMoveOK(int xFinal, int yFinal) {
+		boolean ret = false;
+		if(xFinal==getX()-2 && yFinal==getY()-1){
+    		ret = true;
+    	}
+    	if(xFinal==getX()-1 && yFinal==getY()-2){
+    		return true;
+    	}
+    	//
+    	if(xFinal==getX()+1 && yFinal==getY()-2){
+    		return true;
+    	}
+    	if(xFinal==getX()+2 && yFinal==getY()-1){
+    		return true;
+    	} 
+    	//
+    	if(xFinal==getX()+2 && yFinal==getY()+1){
+    		return true;
+    	}
+    	if(xFinal==getX()+1 && yFinal==getY()+2){
+    		return true;
+    	} 
+    	if(xFinal==getX()-1 && yFinal==getY()+2){
+    		return true;
+    	}
+    	if(xFinal==getX()-2 && yFinal==getY()+1){
+    		return true;
+    	} 
+		return ret;
+	}
+}

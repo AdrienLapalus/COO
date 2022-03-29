@@ -20,12 +20,12 @@ public class Pion extends AbstractPiece implements Pions{
 		boolean ret = false;
 		if(getCouleur() == Couleur.NOIR) {
 			if (firstPlay) {
-				if (xFinal == getX() && (yFinal == getY()-1 || yFinal == getY()-2)){
+				if (xFinal == getX() && (yFinal == getY()+1 || yFinal == getY()+2)){
 					ret = true;
 					firstPlay = false;
 				}
 			else {
-				if (xFinal == getX() && yFinal == getY()-1){
+				if (xFinal == getX() && yFinal == getY()+1){
 					ret = true;
 					}
 			}
@@ -34,13 +34,13 @@ public class Pion extends AbstractPiece implements Pions{
 		else if(getCouleur() == Couleur.BLANC) {
 			if (firstPlay) {
 				
-				if (xFinal == getX() && (yFinal == getY()+1 || yFinal == getY()+2)){
+				if (xFinal == getX() && (yFinal == getY()-1 || yFinal == getY()-2)){
 					ret = true;
 					firstPlay = false;
 					}
 			}
 			else {
-				if (xFinal == getX() && yFinal == getY()+1){
+				if (xFinal == getX() && yFinal == getY()-1){
 					ret = true;
 					}
 			}

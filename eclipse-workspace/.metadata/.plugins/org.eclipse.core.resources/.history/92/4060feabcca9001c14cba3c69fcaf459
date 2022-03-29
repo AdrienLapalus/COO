@@ -1,0 +1,38 @@
+/**
+ * 
+ */
+package model;
+
+/**
+ * @author cpe
+ *
+ */
+public class PionNoir extends Pion {
+
+	/**
+	 * @param couleur_de_piece
+	 * @param coord
+	 */
+	public PionNoir(Coord coord) {
+		super(Couleur.NOIR, coord);
+	}
+
+	@Override
+	protected boolean isPionMoveOk(int yFinal) {
+		boolean ret = false;
+		if (firstPlay) {
+			if ((yFinal == getY()-1 || yFinal == getY()-2)){
+				ret = true;
+				firstPlay = false;
+			}
+		else {
+			if (yFinal == getY()-1){
+				ret = true;
+				}
+		}
+		}
+		return ret;
+	}
+	
+
+}

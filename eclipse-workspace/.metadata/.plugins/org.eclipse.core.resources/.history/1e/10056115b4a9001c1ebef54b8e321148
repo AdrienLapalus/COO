@@ -1,0 +1,9 @@
+package model;
+
+public class Roi extends AbstractPiece{
+	
+	public Roi(Couleur couleur_de_piece,Coord coord) {
+		super(couleur_de_piece,coord);
+	}
+
+}

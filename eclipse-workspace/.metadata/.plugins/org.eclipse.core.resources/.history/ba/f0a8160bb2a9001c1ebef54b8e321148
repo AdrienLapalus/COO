@@ -1,0 +1,7 @@
+package model;
+
+public class Pion {
+	
+	public boolean isMoveOk(int xFinal, int yFinal)
+
+}

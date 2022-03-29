@@ -1,0 +1,26 @@
+/**
+ * 
+ */
+package model;
+
+/**
+ * @author cpe
+ *
+ */
+public class Roi extends AbstractPiece {
+
+	/**
+	 * @param couleur
+	 * @param coord
+	 */
+	public Roi(Couleur couleur, Coord coord) {
+		super(couleur, coord);
+	}
+
+	@Override
+	public boolean isMoveOK(int xFinal, int yFinal) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

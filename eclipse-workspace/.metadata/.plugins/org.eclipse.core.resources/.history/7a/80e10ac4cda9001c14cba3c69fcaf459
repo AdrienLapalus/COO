@@ -1,0 +1,38 @@
+/**
+ * 
+ */
+package model;
+
+/**
+ * @author cpe
+ *
+ */
+public class Roi extends AbstractPiece {
+
+	/**
+	 * @param couleur
+	 * @param coord
+	 */
+	public Roi(Couleur couleur, Coord coord) {
+		super(couleur, coord);
+	}
+
+	@Override
+	public boolean isMoveOK(int xFinal, int yFinal) {
+		boolean ret = false;
+		//deplacement horizontal
+		if(xFinal==getX()+1 && yFinal==getY() || xFinal==getX()-1 && yFinal==getY()){
+    		ret = true;
+    	//deplacement vertical
+    	}else if(x==this.x && y==this.y+1 || x==this.x && y==this.y-1){
+    		ret = true;
+    	//deplacement dans les 4 diagonales
+    	}else if(x==this.x+1 && y==this.y+1 || x==this.x+1 && y==this.y-1 || x==this.x-1 && y==this.y-1 || x==this.x-1 && y==this.y+1){
+    		ret = true;
+			
+		}
+		
+		return ret;
+	}
+
+}

@@ -1,0 +1,7 @@
+package model;
+
+public class Reine extends AbstractPiece {
+	
+	public Reine(Couleur couleur_de_piece, Coord coord);
+
+}

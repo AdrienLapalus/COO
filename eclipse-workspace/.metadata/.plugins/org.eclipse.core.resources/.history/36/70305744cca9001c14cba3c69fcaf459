@@ -1,0 +1,21 @@
+/**
+ * 
+ */
+package model;
+
+/**
+ * @author cpe
+ *
+ */
+public class PionNoir extends Pion {
+
+	/**
+	 * @param couleur_de_piece
+	 * @param coord
+	 */
+	public PionNoir(Coord coord) {
+		super(Couleur.NOIR, coord);
+	}
+	
+
+}

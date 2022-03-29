@@ -1,0 +1,46 @@
+package model;
+
+public abstract class AbstractPiece implements Pieces {
+	
+	public String name;
+	private Couleur couleur;
+	private Coord coord;
+
+	public AbstractPiece(Couleur couleur, Coord coord) {
+		this.name = getClass().getSimpleName();
+		this.couleur = couleur;
+		this.coord = coord;
+	}
+	
+	public boolean capture() {
+		return false;
+		
+	}
+	
+	public Couleur getCouleur() {
+		return couleur;
+	}
+	
+	public int getX() {
+		
+		return coord.clone().x;
+	}
+	
+	public int getY() {
+		return coord.y;
+	}
+	
+	public boolean isMoveOK(int xFinal, int yFinal) {
+		return false;
+	}
+	
+	public boolean move(int xFinal, int yFinal) {
+		return false;
+	}
+	
+	public String toString() {
+		return "";
+	}
+	
+}
+
