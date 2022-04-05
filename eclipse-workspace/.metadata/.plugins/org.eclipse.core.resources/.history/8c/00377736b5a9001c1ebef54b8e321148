@@ -1,5 +1,0 @@
-package vue;
-
-public class ChessGameGUI extends JFrame implements MouseListener, MouseMotionListener, Observer {
-
-}

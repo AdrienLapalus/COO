@@ -4,14 +4,22 @@ import java.awt.event.MouseEvent;
 
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.util.Observable;
-import java.util.Observer;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import java.util.List;
+
 import javax.swing.*;
 
 import javax.swing.JFrame;
+
+import controler.ChessGameControlers;
+import controler.controlerLocal.ChessGameControler;
+import model.Coord;
+import model.Couleur;
+import model.PieceIHM;
+import tools.ChessImageProvider;
+import tools.ChessPieceImage;
 
 public class ChessGameGUI extends JFrame implements MouseListener, MouseMotionListener, Observer {
 	
@@ -20,40 +28,48 @@ public class ChessGameGUI extends JFrame implements MouseListener, MouseMotionLi
     JLabel chessPiece;
     int xAdjustment;
     int yAdjustment;
+	ChessGameControlers chessGameControler;
+    Coord initCoord;
+	Coord finalCoord;
 	
-    
     public ChessGameGUI() {
-    	Dimension boardSize = new Dimension(600, 600);
     	
-    //  Use a Layered Pane for this this application
-    	 layeredPane = new JLayeredPane();
-    	  getContentPane().add(layeredPane);
-    	  layeredPane.setPreferredSize(boardSize);
-    	  layeredPane.addMouseListener(this);
-    	  layeredPane.addMouseMotionListener(this);
-
-    	  //Add a chess board to the Layered Pane 
-    	 
-    	  chessBoard = new JPanel();
-    	  layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
-    	  chessBoard.setLayout( new GridLayout(8, 8) );
-    	  chessBoard.setPreferredSize( boardSize );
-    	  chessBoard.setBounds(0, 0, boardSize.width, boardSize.height);
-    	 
-    	  for (int i = 0; i < 64; i++) {
-    	  JPanel square = new JPanel( new BorderLayout() );
-    	  chessBoard.add( square );
-    	 
-    	  int row = (i / 8) % 2;
-    	  if (row == 0)
-    	  square.setBackground( i % 2 == 0 ? Color.blue : Color.white );
-    	  else
-    	  square.setBackground( i % 2 == 0 ? Color.white : Color.blue );
-    	  }
+    }
+    
+    public ChessGameGUI(String name,ChessGameControlers chessGameControler,Dimension boardSize) {
+    	
+        //  Use a Layered Pane for this this application
+        	 layeredPane = new JLayeredPane();
+        	  getContentPane().add(layeredPane);
+        	  layeredPane.setPreferredSize(boardSize);
+        	  layeredPane.addMouseListener(this);
+        	  layeredPane.addMouseMotionListener(this);
+        	  
+        	  this.chessGameControler = chessGameControler;
+        	  //Add a chess board to the Layered Pane 
+        	 
+        	  chessBoard = new JPanel();
+        	  layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
+        	  chessBoard.setLayout( new GridLayout(8, 8) );
+        	  chessBoard.setPreferredSize( boardSize );
+        	  chessBoard.setBounds(0, 0, boardSize.width, boardSize.height);
+        	 
+        	  for (int i = 0; i < 64; i++) {
+        	  JPanel square = new JPanel( new BorderLayout() );
+        	  chessBoard.add( square );
+        	 
+        	  int row = (i / 8) % 2;
+        	  if (row == 0)
+        	  square.setBackground( i % 2 == 0 ? Color.black : Color.white );
+        	  else
+        	  square.setBackground( i % 2 == 0 ? Color.white : Color.black );
+        	  }
+    	
+    }
     	 
     	  //Add a few pieces to the board
-    	 
-    	  JLabel piece = new JLabel( new ImageIcon("/home/vinod/amarexamples/chess.jpg") );
+    	 /*
+    	  JLabel piece = new JLabel(new ImageIcon(ChessImageProvider.getImageFile("Pion",Couleur.BLANC))) ;
     	  JPanel panel = (JPanel)chessBoard.getComponent(0);
     	  panel.add(piece);
     	  piece = new JLabel(new ImageIcon("/home/vinod/amarexamples/chess1.jpg"));
@@ -65,15 +81,24 @@ public class ChessGameGUI extends JFrame implements MouseListener, MouseMotionLi
     	  piece = new JLabel(new ImageIcon("/home/vinod/amarexamples/camel.jpg"));
     	  panel = (JPanel)chessBoard.getComponent(20);
     	  panel.add(piece);
-
-    	  
-    }
+    	  */
     
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
+public void update(Observable arg0, Object arg1) {
+	
+	List<PieceIHM> piecesIHM = (List<PieceIHM>) arg1;
+
+	// création d'un tableau 2D avec les noms des pièces
+	for(PieceIHM pieceIHM : piecesIHM) {
+		Couleur color = pieceIHM.getCouleur();
+		String type = pieceIHM.getTypePiece();
+		for(Coord coord : pieceIHM.getList()) {
+			JLabel piece = new JLabel(new ImageIcon(ChessImageProvider.getImageFile(type,color)));
+	   	  	JPanel panel = (JPanel)chessBoard.getComponent(coord.y*8 + coord.x);
+	   	  	panel.add(piece);
+		}
 		
 	}
+}
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
@@ -100,7 +125,8 @@ public class ChessGameGUI extends JFrame implements MouseListener, MouseMotionLi
 		 
 		  if (c instanceof JPanel) 
 		  return;
-		 
+		  
+		  initCoord = new Coord(e.getX(),e.getY());
 		  Point parentLocation = c.getParent().getLocation();
 		  xAdjustment = parentLocation.x - e.getX();
 		  yAdjustment = parentLocation.y - e.getY();
@@ -116,7 +142,9 @@ public class ChessGameGUI extends JFrame implements MouseListener, MouseMotionLi
 		 
 		  chessPiece.setVisible(false);
 		  Component c =  chessBoard.findComponentAt(e.getX(), e.getY());
-		 
+		  finalCoord = new Coord(e.getX(),e.getY());
+		  boolean result = chessGameControler.move(initCoord, finalCoord);
+		  System.out.println(result);
 		  if (c instanceof JLabel){
 		  Container parent = c.getParent();
 		  parent.remove(0);

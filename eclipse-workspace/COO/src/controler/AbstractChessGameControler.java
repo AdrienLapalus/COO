@@ -59,7 +59,7 @@ public abstract class AbstractChessGameControler implements ChessGameControlers 
 	 * tente de déplacer est bien celle du jeu courant
 	 * la vue se servira de cette information pour empêcher tout déplacement sur le damier
 	 */
-	public abstract boolean isPlayerOK(Coord initCoord) ;
+	public abstract boolean isPlayerOK(Coord initCoord);
 
 	// Déplacement métier
 	protected  boolean moveModel(Coord initCoord, Coord finalCoord)  {	
@@ -88,7 +88,7 @@ public abstract class AbstractChessGameControler implements ChessGameControlers 
 		return this.chessGame.getColorCurrentPlayer();		
 	}	
 
-	protected Couleur getPieceColor(Coord initCoord){		
+	protected Couleur getPieceColor(Coord initCoord){	
 		return this.chessGame.getPieceColor(initCoord.x, initCoord.y);		
 	}	
 	
