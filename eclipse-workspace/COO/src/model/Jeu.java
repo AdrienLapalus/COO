@@ -96,7 +96,7 @@ public class Jeu {
 	
 	public boolean isMoveOk(int xInit, int yInit, int xFinal, int yFinal){
 		boolean ret = false;
-		if (xInit != xFinal && yInit != yFinal) {
+		if ((xInit != xFinal && yInit == yFinal) || (xInit == xFinal && yInit != yFinal)) {
 			if(Coord.coordonnees_valides(xFinal, yFinal)) {
 				ret = true;
 			}

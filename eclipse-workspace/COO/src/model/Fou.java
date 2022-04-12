@@ -9,11 +9,12 @@ public class Fou extends AbstractPiece {
 	@Override
 	public boolean isMoveOK(int xFinal, int yFinal) {
 		boolean ret = false;
-		if (xFinal != getX() && yFinal != getY()) {
-			if(Math.abs(xFinal-getX()) == Math.abs(yFinal)-getY()) {
-				ret = true;
-			}	
-		}
+		int coordX = Math.abs(xFinal-getX());
+		int coordY = Math.abs(yFinal-getY());
+		System.out.println(coordX + "" + coordY);
+		if( coordX == coordY ) {
+			ret = true;
+		}	
 		return ret;
 	}
 

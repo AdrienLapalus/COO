@@ -84,9 +84,7 @@ public class ChessGameGUI extends JFrame implements MouseListener, MouseMotionLi
     	  */
     
 public void update(Observable arg0, Object arg1) {
-	
 	List<PieceIHM> piecesIHM = (List<PieceIHM>) arg1;
-
 	// création d'un tableau 2D avec les noms des pièces
 	for(PieceIHM pieceIHM : piecesIHM) {
 		Couleur color = pieceIHM.getCouleur();
@@ -94,8 +92,12 @@ public void update(Observable arg0, Object arg1) {
 		for(Coord coord : pieceIHM.getList()) {
 			JLabel piece = new JLabel(new ImageIcon(ChessImageProvider.getImageFile(type,color)));
 	   	  	JPanel panel = (JPanel)chessBoard.getComponent(coord.y*8 + coord.x);
-	   	  	panel.add(piece);
+	   	  	if(panel.getComponentCount() == 0) {
+	   	  		panel.add(piece);
+	   	  	}
+	   	  	
 		}
+		
 		
 	}
 }
@@ -126,37 +128,54 @@ public void update(Observable arg0, Object arg1) {
 		  if (c instanceof JPanel) 
 		  return;
 		  
-		  initCoord = new Coord(e.getX(),e.getY());
+		
 		  Point parentLocation = c.getParent().getLocation();
 		  xAdjustment = parentLocation.x - e.getX();
 		  yAdjustment = parentLocation.y - e.getY();
+		  initCoord = getCoord(c);
 		  chessPiece = (JLabel)c;
 		  chessPiece.setLocation(e.getX() + xAdjustment, e.getY() + yAdjustment);
 		  chessPiece.setSize(chessPiece.getWidth(), chessPiece.getHeight());
 		  layeredPane.add(chessPiece, JLayeredPane.DRAG_LAYER);
 		  }
-
+	
+	private Coord getCoord(Component c) {
+		  Component square = c instanceof JLabel ? c.getParent() : c;
+		  Container ech = square.getParent();
+		  Component[] cases = ech.getComponents();
+		  int indexCases = Arrays.asList(cases).indexOf(square);
+		  int x = indexCases%8;
+		  int y = indexCases/8;
+		  return new Coord(x,y);
+	}
 	@Override
 	 public void mouseReleased(MouseEvent e) {
 		  if(chessPiece == null) return;
 		 
 		  chessPiece.setVisible(false);
 		  Component c =  chessBoard.findComponentAt(e.getX(), e.getY());
-		  finalCoord = new Coord(e.getX(),e.getY());
+		  Container ech = c.getParent();
+		  Component[] cases = ech.getComponents();
+		  System.out.println(cases);
+		  finalCoord = getCoord(c);
+		  System.out.println(initCoord + "" +finalCoord);
 		  boolean result = chessGameControler.move(initCoord, finalCoord);
 		  System.out.println(result);
-		  if (c instanceof JLabel){
-		  Container parent = c.getParent();
-		  parent.remove(0);
-		  parent.add( chessPiece );
+		  if(result) {
+			  if (c instanceof JLabel){
+				  Container parent = c.getParent();
+				  parent.remove(0);
+				  parent.add( chessPiece );
+				  }
+			  else {
+				  Container parent = (Container)c;
+				  parent.add( chessPiece );
+				  }
+			  chessPiece.setVisible(true);
+				  }
+		  	
 		  }
-		  else {
-		  Container parent = (Container)c;
-		  parent.add( chessPiece );
-		  }
-		 
-		  chessPiece.setVisible(true);
-		  }
+		
 
 	@Override
 	public void mouseDragged(MouseEvent me) {

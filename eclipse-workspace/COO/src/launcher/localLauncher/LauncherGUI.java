@@ -40,7 +40,7 @@ public class LauncherGUI {
 		chessGame.addObserver((Observer) frame);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocation(600, 10);
+		frame.setLocation(600,10);
 		//frame.setPreferredSize(dim);
 		frame.pack();
 		frame.setVisible(true);

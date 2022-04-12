@@ -59,11 +59,12 @@ public class ChessGame extends Observable implements BoardGames{
 	 */
 	public boolean move (int xInit, int yInit, int xFinal, int yFinal){
 		boolean ret = false; 
+		boolean retm = false;
 		ret = echiquier.isMoveOk(xInit, yInit, xFinal, yFinal);
 		if (ret){
-			ret = echiquier.move(xInit, yInit, xFinal, yFinal);
+			retm = echiquier.move(xInit, yInit, xFinal, yFinal);
 		}
-		if (ret){
+		if (retm){
 			echiquier.switchJoueur();
 		}		
 		
